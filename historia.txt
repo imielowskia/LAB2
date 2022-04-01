@@ -1,0 +1,23 @@
+rails new LAB --css bootstrap
+cd LAB
+rails g scaffold Course nazwa:string
+rails g scaffold Group nazwa:string semestr:integer
+rails g scaffold Student imie:string nazwisko:string indeks:string group:references
+rails g migration AddJoinTableCourseGroup courses groups
+
+zapis w modelach dotyczący relacji 
+
+class Student < ApplicationRecord
+  belongs_to :group
+end
+
+class Group < ApplicationRecord
+	has_and_belongs_to_many :courses
+	has_many :students
+end
+
+class Student < ApplicationRecord
+  belongs_to :group
+end
+
+Dopasowanie widoków głównie _form, _student, _group, _course

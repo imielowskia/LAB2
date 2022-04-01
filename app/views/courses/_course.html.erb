@@ -1,0 +1,39 @@
+<div id="<%= dom_id course %>">
+
+
+  <div class="row bg-light p-2 gx-3">
+    <div class="col-2">
+      <h3>Nazwa:</h3>
+    </div>
+    <div class="col">
+     <h3> <%= course.nazwa %></h3>
+    </div>
+    <div class="col-1">
+      <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm btn-primary " %>
+    </div>
+    <div class="col-1">
+      <%= button_to "Destroy", @course, method: :delete, class: "btn btn-sm btn-primary " %>
+    </div>
+  </div>
+  <div class="row gx-3" >
+    <% course.groups.each do |g| %>
+    <div class="col-4" >
+      <div class="card bg-info">
+        <div class="card-body">
+           <h5 class="card-title"> Grupa: <%= g.nazwa %></h5>
+           <div class="card-text">
+            Studenci:
+            <ol class="list-group list-group-numbered">
+              <% g.students.each do |s| %>
+                <li class="list-group-item"> <%= s.imie %> <%= s.nazwisko %></li>
+              <% end %>
+            </ol>
+           </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  imie: MyString
+  nazwisko: MyString
+  indeks: MyString
+  group: one
+
+two:
+  imie: MyString
+  nazwisko: MyString
+  indeks: MyString
+  group: two

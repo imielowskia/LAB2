@@ -1,0 +1,46 @@
+<div id="<%= dom_id group %>">
+
+  <div class="row bg-light p-3 border-top border-info gx-3">
+
+    <div class="col-1 ms-auto h3">Nazwa:</div>
+    <div class="col-3 ms-auto h3"><%= group.nazwa %></div>
+    <div class="col-1 ms-auto h3">Semestr:</div>
+    <div class="col-3 ms-auto h3"><%= group.semestr %></div>
+    <div class="col-1"><%= link_to "Edit", edit_group_path(group), class: "btn btn-sm btn-primary" %></div>
+    <div class="col-1"><%= button_to "Destroy", group, method: :delete, class: "btn btn-sm btn-primary" %></div>
+
+  </div>
+
+  <div class="row gx-3">
+    <div class="col-4">
+      <div class="card bg-info">
+        <div class="card-body">
+          <div class="card-title h5">Przedmioty:</div>
+          <div class="card-text">
+            <ol class="list-group list-group-numbered">
+            <% group.courses.each do |c| %>
+                <li class="list-group-item"><%= c.nazwa %></li>
+            <% end %>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card bg-info">
+        <div class="card-body">
+          <div class="card-title h5">Studenci:</div>
+          <div class="card-text">
+            <ol class="list-group list-group-numbered">
+            <% group.students.each do |s| %>
+                <li class="list-group-item"><%= s.imie %> <%= s.nazwisko %></li>
+            <% end %>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

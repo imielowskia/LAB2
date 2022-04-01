@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+
+<div class="row bg-success p-3 gx-3">
+  <div class="col-8 h2">Grupy</div>
+  <div class="col"></div>
+  <div class="col-1"><%= link_to "Studenci", students_path, class: "btn btn-info" %> </div>
+  <div class="col-1"><%= link_to "Przedmioty", courses_path, class: "btn btn-info" %> </div>
+</div>
+
+
+<div id="groups">
+  <% @groups.each do |group| %>
+    <%= render group %>
+
+  <% end %>
+</div>
+
+<%= link_to "New group", new_group_path %>
