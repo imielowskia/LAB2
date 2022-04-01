@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[ show edit update destroy ]
+  before_action :set_student, only: %i[ show edit update destroy grade zapisz]
 
   # GET /students or /students.json
   def index
@@ -27,6 +27,26 @@ class StudentsController < ApplicationController
       format.html { redirect_to students_url(id: id)  }
       format.json { head :no_content }
     end
+  end
+
+  # GET /students/1/grade
+  def grade
+    @course = Course.find(params[:course_id])
+    unless @student.courses.exists?(id: @course.id)
+      @student.courses<<@course
+    end
+    @cs = @student.course_students.where(course_id: @course.id).first.grade
+  end
+
+  # POST /students
+  def zapisz
+    @course = Course.find(params[:course_id])
+    @grade = params[:grade].to_i
+    xcs = @student.course_students.where(course_id: @course.id).first
+    xcs.grade = @grade
+    xcs.save!
+    redirect_to students_url, notice: "Zapisano ocenę: "+@grade.to_s
+
   end
 
   # POST /students or /students.json
@@ -75,6 +95,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:imie, :nazwisko, :indeks, :group_id)
+      params.require(:student).permit(:imie, :nazwisko, :indeks, :group_id, course_students_attributes:[:grade])
     end
 end

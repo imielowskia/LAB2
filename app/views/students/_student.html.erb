@@ -15,7 +15,7 @@
     <div class="col ms-2">
       <ol class="list-group list-group-numbered">
         <% student.group.courses.each do |c| %>
-          <li class="list-group-item h6"><%= c.nazwa %></li>
+          <li class="list-group-item h6"><%= c.nazwa %> <%= link_to "Oceń", grade_student_path(student, course_id: c.id), class: "btn btn-sm btn-danger" %></li>
         <% end %>
       </ol>
     </div>
