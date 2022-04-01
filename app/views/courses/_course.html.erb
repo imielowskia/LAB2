@@ -1,7 +1,7 @@
 <div id="<%= dom_id course %>">
 
 
-  <div class="row bg-light p-2 gx-3">
+  <div class="row bg-light p-3 border-top border-info">
     <div class="col-2">
       <h3>Nazwa:</h3>
     </div>
@@ -15,7 +15,7 @@
       <%= button_to "Destroy", @course, method: :delete, class: "btn btn-sm btn-primary " %>
     </div>
   </div>
-  <div class="row gx-3" >
+  <div class="row p-3" >
     <% course.groups.each do |g| %>
     <div class="col-4" >
       <div class="card bg-info">

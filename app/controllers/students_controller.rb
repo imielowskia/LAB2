@@ -4,6 +4,11 @@ class StudentsController < ApplicationController
   # GET /students or /students.json
   def index
     @students = Student.all
+    if params.has_key?(:id)
+      @student = Student.find(params[:id])
+    else
+      @student = Student.new
+    end
   end
 
   # GET /students/1 or /students/1.json
@@ -17,6 +22,11 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+    id = @student.id
+    respond_to do |format|
+      format.html { redirect_to students_url(id: id)  }
+      format.json { head :no_content }
+    end
   end
 
   # POST /students or /students.json
@@ -38,7 +48,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
+        format.html { redirect_to students_url, notice: "Student was successfully updated." }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit, status: :unprocessable_entity }

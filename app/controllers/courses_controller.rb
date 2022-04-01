@@ -4,6 +4,11 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @courses = Course.all
+    if params.has_key?(:id)
+      @course = Course.find(params[:id])
+    else
+      @course = Course.new
+    end
   end
 
   # GET /courses/1 or /courses/1.json
@@ -38,7 +43,7 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to course_url(@course), notice: "Course was successfully updated." }
+        format.html { redirect_to courses_url, notice: "Course was successfully updated." }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit, status: :unprocessable_entity }

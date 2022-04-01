@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="row bg-info gy-lg-3 ">
+  <div class="row bg-info border border-danger border-bottom-0 p-3 ">
     <div class="col-1 md-auto h5"><%= form.label :nazwa, style: "display: block" %></div>
     <div class="col-3 md-auto h5"><%= form.text_field :nazwa %></div>
     <div class="col-1 md-auto h5"><%= form.label :semestr, style: "display: block" %></div>
@@ -21,7 +21,7 @@
 
 
 
-  <div class="row bg-info justify-content-center">
+  <div class="row bg-info justify-content-center justify-content-between border border-danger border-top-0 p-3">
     <div class="col-6 md-auto">
       <%= form.collection_check_boxes :course_ids, Course.all, :id, :nazwa, {}, {class: "form-check form-check-inline"}  %>
     </div>

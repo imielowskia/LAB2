@@ -4,6 +4,11 @@ class GroupsController < ApplicationController
   # GET /groups or /groups.json
   def index
     @groups = Group.all
+    if params.has_key?(:id)
+      @group = Group.find(params[:id])
+    else
+      @group = Group.new
+    end
   end
 
   # GET /groups/1 or /groups/1.json
@@ -38,7 +43,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to group_url(@group), notice: "Group was successfully updated." }
+        format.html { redirect_to groups_url, notice: "Group was successfully updated." }
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit, status: :unprocessable_entity }

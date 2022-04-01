@@ -21,3 +21,8 @@ class Student < ApplicationRecord
 end
 
 Dopasowanie widoków głównie _form, _student, _group, _course
+
+Druga część - branch "dodanie_edycji_do_index"
+
+zmiany w:
+kontrolerze i index dla students, groups, courses
