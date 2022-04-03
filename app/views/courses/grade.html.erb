@@ -1,0 +1,35 @@
+<div class="row bg-success p-3">
+  <div class="col h2">Oceny</div>
+</div>
+<div class="row bg-light p-3">
+  <div class="col-2">
+    <h3>Przedmiot:</h3>
+  </div>
+  <div class="col">
+    <h3> <%= @course.nazwa %></h3>
+  </div>
+  <div class="col-2">
+    <h3>Grupa:</h3>
+  </div>
+  <div class="col">
+    <h3> <%= @group.nazwa %></h3>
+  </div>
+</div>
+
+<%= form_with url: zapisz_course_url do |form| %>
+  <% for i in 0..@ile-1 do %>
+    <%= form.hidden_field :group_id, value: @group.id %>
+    <div class="row p-3 bg-info border border-primary">
+      <%= form.hidden_field 's_'+i.to_s, value: @students[i].id %>
+      <div class="col"><%=@students[i][:imie] %> </div>
+      <div class="col"><%=@students[i][:nazwisko] %> </div>
+      <div class="col"><%= form.text_field 'g_'+i.to_s, value: @grades[i] %></div>
+    </div>
+  <% end %>
+  <div class="row bg-light p-3">
+    <div class="col"></div>
+    <div class="col"> <%= form.submit "Zapisz", class: "btn btn-primary" %></div>
+  </div>
+
+<% end %>
+

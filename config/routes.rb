@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     end
   end
   resources :groups
-  resources :courses
+  resources :courses do
+    member do
+      get :grade
+      post :zapisz
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

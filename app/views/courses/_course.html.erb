@@ -20,12 +20,15 @@
     <div class="col-4" >
       <div class="card bg-info">
         <div class="card-body">
-           <h5 class="card-title"> Grupa: <%= g.nazwa %></h5>
+           <h5 class="card-title"> Grupa: <%= g.nazwa %> <%= link_to "Ocenianie", grade_course_path(course, group_id: g.id) ,class: "btn btn-sm btn-primary" %></h5>
            <div class="card-text">
             Studenci:
             <ol class="list-group list-group-numbered">
               <% g.students.each do |s| %>
-                <li class="list-group-item"> <%= s.imie %> <%= s.nazwisko %></li>
+                <li class="list-group-item"> <%= s.imie %> <%= s.nazwisko %>
+                  <% if s.course_students.exists?(course_id: course.id, student_id: s.id) %>
+                    - <%=s.course_students.where(course_id: course.id, student_id: s.id).first.grade %></li>
+                  <%end %>
               <% end %>
             </ol>
            </div>

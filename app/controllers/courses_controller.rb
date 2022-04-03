@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy grade zapisz]
 
   # GET /courses or /courses.json
   def index
@@ -9,6 +9,8 @@ class CoursesController < ApplicationController
     else
       @course = Course.new
     end
+
+
   end
 
   # GET /courses/1 or /courses/1.json
@@ -22,6 +24,37 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+  end
+
+  #GET /courses/1/grade
+  def grade
+    @group = Group.find(params[:group_id])
+    @students = @course.groups.find(@group.id).students
+    @ile = @students.count
+
+    @grades = Array.new(@students.count)
+    for i in 0..@ile-1
+      if @course.students.exists?(@students[i].id)
+        x = @students[i].course_students.first.grade
+      else
+        x = 0
+      end
+      @grades[i]=x
+    end
+  end
+
+  #POST /courses/1/zapisz
+  def zapisz
+    @group = Group.find(params[:group_id])
+    @students = @course.groups.find(@group.id).students
+    @ile = @students.count
+    for i in 0..@ile-1
+      xocena = params['g_'+i.to_s].to_i
+      @students[i].courses.destroy(@course)
+      xcs = CourseStudent.new(course_id: @course.id, student_id: @students[i].id, grade: xocena)
+      xcs.save!
+    end
+    redirect_to courses_url, notice: "Zapisano oceny"
   end
 
   # POST /courses or /courses.json
